@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
-        System.out.println(zhishu(1000000) + " " + count);
+        System.out.println(zhishu2(100000) + " " + count);
         long end = System.currentTimeMillis();
         System.out.println(end-start);
     }
@@ -20,7 +20,7 @@ public class Main {
      */
     public static LinkedHashSet<Integer> zhishu2(int n) {
         LinkedHashSet<Integer> res = new LinkedHashSet<>();
-        for (int i = 2; i <= n; i++) {
+        for (int i = 1; i <= n; i+=2) {
             if (isSushu1(i)) {
                 res.add(i);
             }
@@ -41,21 +41,22 @@ public class Main {
             return res;
         }
         int num = (int) Math.sqrt(n);
-        LinkedHashSet<Integer> arr = new LinkedHashSet<>();//结合小部分暴力法
-//        LinkedHashSet<Integer> arr = zhishu(num);//递归
-        for (int i = 2; i <= num; i++) {
-            if (isSushu1(i))
-                arr.add(i);
-        }
+//        LinkedHashSet<Integer> arr = new LinkedHashSet<>();//结合小部分暴力法
+        LinkedHashSet<Integer> arr = zhishu(num);//递归
+//        for (int i = 2; i <= num; i++) {
+//            if (isSushu1(i))
+//                arr.add(i);
+//        }
 
-
-        for (int i = 2; i <= n; i++) {
+        res.add(2);
+        for (int i = 1; i <= n; i+=2) {
             res.add(i);
         }
+        res.remove(1);
         for (Integer integer : arr) {
             int index = integer;
             int i = 2;
-            while (index * i <= n) {
+            while (integer>=2&&index * i <= n) {
                 res.remove(index * i);
                 i++;
             }
